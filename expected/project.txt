@@ -1,0 +1,5 @@
+TAP version 13
+ok 1 - decimal invoice total
+ok 2 - full boxes in a shipment
+ok 3 - label printer # SKIP device offline
+1..3

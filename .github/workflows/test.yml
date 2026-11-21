@@ -1,0 +1,39 @@
+name: Test Blyx framework
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-latest, platform: linux-x64, suffix: '' }
+          - { os: windows-latest, platform: windows-x64, suffix: '.exe' }
+          - { os: macos-15, platform: macos-arm64, suffix: '' }
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - run: cargo install --locked --version 0.2.1 blyxc
+      - run: blyxc native-run tests.blyx
+      - name: Verify native output and build the standalone example
+        run: |
+          set -euo pipefail
+          mkdir build
+          blyxc native-run example.blyx | tr -d '\r' > build/example.txt
+          diff -u expected/example.txt build/example.txt
+          blyxc build project.blyx -o build/wren-demo${{ matrix.suffix }}
+          ./build/wren-demo${{ matrix.suffix }} | tr -d '\r' > build/project.txt
+          diff -u expected/project.txt build/project.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wren-${{ matrix.platform }}
+          path: build/wren-demo${{ matrix.suffix }}
+          if-no-files-found: error

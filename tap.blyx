@@ -1,0 +1,30 @@
+use std::text;
+use wren;
+
+fn wr_label(name: str) -> str {
+    return text_trim(text_before(text_before(text_before(name, "\n"), "\r"), "#"));
+}
+pub fn wr_begin() -> vector {
+    println!("TAP version 13");
+    wr_start()
+}
+pub fn wr_check(state: vector, passed: bool, name: str) -> vector {
+    let next = wr_record(state, passed, false);
+    if len(next) != 3 { return []; }
+    if passed { print!("ok "); } else { print!("not ok "); }
+    print!(at(next, 0)); print!(" - "); println!(wr_label(name));
+    next
+}
+pub fn wr_skip(state: vector, name: str, detail: str) -> vector {
+    let next = wr_record(state, true, true);
+    if len(next) != 3 { return []; }
+    print!("ok "); print!(at(next, 0)); print!(" - "); print!(wr_label(name));
+    print!(" # SKIP "); println!(wr_label(detail));
+    next
+}
+pub fn wr_end(state: vector) -> i64 {
+    if len(state) != 3 { println!("Bail out! Invalid suite state"); return 1; }
+    if at(state, 0) == 0.0 { println!("1..0 # SKIP Empty suite"); return 0; }
+    print!("1.."); println!(at(state, 0));
+    wr_exit(state)
+}

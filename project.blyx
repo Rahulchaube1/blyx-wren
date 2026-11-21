@@ -1,0 +1,10 @@
+use std::cli;
+use tap;
+use wren;
+fn main() {
+    let mut suite = wr_begin();
+    suite = wr_check(suite, wr_near(0.1 + 0.2, 0.3, 0.000001, 0.0), "decimal invoice total");
+    suite = wr_check(suite, 24 / 5 == 4, "full boxes in a shipment");
+    suite = wr_skip(suite, "label printer", "device offline");
+    process_exit(wr_end(suite));
+}

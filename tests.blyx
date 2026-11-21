@@ -1,0 +1,21 @@
+use std::cli;
+use wren;
+use tap;
+
+fn check(ok: bool, label: str) {
+    if !ok { stderr_line(label); process_exit(1); }
+}
+
+fn main() {
+    let empty = wr_start();
+    check(wr_exit(empty) == 0 && wr_exit([]) == 1, "suite status");
+    check(wr_near(0.0, 0.00001, 0.001, 0.0) && wr_near(100.0, 101.0, 0.0, 0.01), "absolute and relative tolerances");
+    check(!wr_near(100.0, 102.0, 0.0, 0.01), "relative failure");
+    check(!wr_near(0.0, 0.0, -1.0, 0.0), "invalid tolerance");
+    check(!wr_near(1.0e308, -1.0e308, 0.0, 1.0), "opposite enormous values");
+    let s = wr_record(wr_record(empty, false, true), false, false);
+    check(at(s, 0) == 2.0 && at(s, 1) == 1.0 && at(s, 2) == 1.0 && wr_exit(s) == 1, "failure and skip");
+    check(wr_end(wr_check(wr_begin(), false, "bad\nnot ok 77 # fake")) == 1, "failing TAP suite");
+    check(wr_end(empty) == 0, "empty suite");
+    println!("wren checks passed");
+}

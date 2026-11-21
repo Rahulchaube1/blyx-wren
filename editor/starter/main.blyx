@@ -1,0 +1,11 @@
+use vendor::wren::wren;
+
+fn main() {
+    let first = wr_record(wr_start(), wr_near(0.1 + 0.2, 0.3, 0.000001, 0.0), false);
+    let second = wr_record(first, false, true);
+    let result = wr_record(second, 2 * 2 == 5, false);
+    println!(at(result, 0));
+    println!(at(result, 1));
+    println!(at(result, 2));
+    println!(wr_exit(result));
+}

@@ -1,0 +1,57 @@
+{
+  "name": "blyx-wren",
+  "displayName": "Blyx Wren",
+  "description": "Run named checks and skips, compare floating-point measurements, and report a TAP 13 stream and a process exit status for CI.",
+  "version": "0.1.0",
+  "publisher": "RahulChaube",
+  "license": "(MIT OR Apache-2.0)",
+  "icon": "logo.png",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "keywords": [
+    "blyx",
+    "wren",
+    "framework"
+  ],
+  "homepage": "https://www.blyx-lang.space/packages/wren",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Rahulchaube1/blyx-wren.git",
+    "directory": "editor"
+  },
+  "bugs": {
+    "url": "https://github.com/Rahulchaube1/blyx-wren/issues"
+  },
+  "extensionDependencies": [
+    "RahulChaube.blyx-language"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "blyx",
+        "path": "./snippets/framework.json"
+      }
+    ],
+    "walkthroughs": [
+      {
+        "id": "wren.start",
+        "title": "Get started with Wren",
+        "description": "Run named checks and skips, compare floating-point measurements, and report a TAP 13 stream and a process exit status for CI.",
+        "steps": [
+          {
+            "id": "run",
+            "title": "Run the Wren example",
+            "description": "Create an empty .blyx file, insert blyx-wren-demo and choose **Blyx: Run File**.\n[Open the documentation](https://www.blyx-lang.space/packages/wren)",
+            "media": {
+              "markdown": "walkthrough.md"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

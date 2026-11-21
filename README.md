@@ -1,10 +1,14 @@
-<img src="assets/logo.png" width="112" height="112" alt="Wren bird logo">
+<img src="assets/logo.png" width="112" height="112" alt="A chestnut wren with a cream eyebrow holds its striped tail upright.">
 
 # Blyx Wren
 
 Run named checks and skips, compare floating-point measurements, and report a TAP 13 stream and a process exit status for CI.
 
 A test that only prints an error can leave a build green. TAP defines a machine-readable result for each check and a plan stating how many results to expect. Wren couples that output to the number of failures. [Test Anything Protocol, TAP 13 specification](https://testanything.org/tap-version-13-specification.html)
+
+## Editor extension
+
+Install **RahulChaube.blyx-wren** to run the worked example and use the framework’s function completions in a Blyx file. Open an empty `.blyx` file, enter `blyx-wren-demo`, then choose **Blyx: Run File**. [Editor downloads](https://www.blyx-lang.space/packages/wren#editor) · [Download the extension](https://github.com/Rahulchaube1/blyxxxx/releases/download/framework-editors-v0.1.0/blyx-wren-0.1.0.vsix) · [Starter with framework source](https://github.com/Rahulchaube1/blyxxxx/releases/download/framework-editors-v0.1.0/blyx-wren-starter-0.1.0.zip)
 
 ## Install and run
 
